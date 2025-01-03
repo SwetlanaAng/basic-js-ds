@@ -1,4 +1,4 @@
-const { NotImplementedError } = require('../extensions/index.js');
+const { NotImplementedError, ListNode } = require('../extensions/index.js');
 
 // const { ListNode } = require('../extensions/list-node.js');
 
@@ -22,9 +22,82 @@ const { NotImplementedError } = require('../extensions/index.js');
  *   }
  * }
  */
-function removeKFromList(/* l, k */) {
-  throw new NotImplementedError('Not implemented');
-  // remove line with error and write your code here
+/* class List {
+  constructor(){
+    this.head = null;
+    this.length = 0;
+  }
+  addElement(val){
+    if(this.length === 0) this.head = new ListNode(val);
+    else {
+      let current = this.head;
+      while(current.next) {
+        current = current.next;
+      };
+      current.next = new ListNode(val);
+    }
+    this.length++;
+  }
+  removeElement(index){
+    let cur = this.head;
+    if(index === 0){
+      this.head = cur.next;
+    }else {
+      let prev = null;
+      let position = 0;
+      while(position < index){
+        prev = cur;
+        cur = cur.next;
+        position ++
+      }
+      prev.next = cur.next;
+    }
+    this.length--;
+  }
+  showList(){
+    let current = this.head;
+    const ans = [];
+    while(current.next){
+      ans.push(current.value);
+      current = current.next;
+    }
+    return ans;
+  }
+} */
+function removeKFromList(l, k) {
+  function findInd(l,value){
+    let cur = l;
+    let index = 0;
+    while(cur.next){
+      if(cur.value === value) return index;
+      cur = cur.next;
+      index++
+    }
+    if(cur.value === value) return index;
+    return -1;
+  }
+  function removeElement(index){
+    let cur = l;
+    if(index === 0){
+      l = cur.next;
+    }else {
+      let prev = null;
+      let position = 0;
+      while(position < index){
+        prev = cur;
+        cur = cur.next;
+        position ++
+      }
+      prev.next = cur.next;
+    }
+  }
+  
+  let indexK = findInd(l, k);
+  while(indexK !== -1){
+    removeElement(indexK);
+    indexK = findInd(l, k);
+  }
+  return l;
 }
 
 module.exports = {
