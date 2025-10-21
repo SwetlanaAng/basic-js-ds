@@ -14,19 +14,31 @@ const { NotImplementedError } = require('../lib/errors');
  */
 
 class Queue {
+  constructor() {
+    this.head = null;
+    this.length = 0;
+  }
   getUnderlyingList() {
-    // Remove line below and write your code here
-    throw new NotImplementedError('Not implemented');
+    return this.head;
   }
 
-  enqueue(/* value */) {
-    // Remove line below and write your code here
-    throw new NotImplementedError('Not implemented');
+  enqueue(value) {
+    if(this.length === 0) this.head = new ListNode(value);
+    else {
+      let current = this.head;
+      while(current.next) {
+        current = current.next;
+      };
+      current.next = new ListNode(value);
+    }
+    this.length++;
   }
 
   dequeue() {
-    // Remove line below and write your code here
-    throw new NotImplementedError('Not implemented');
+    const deletedHead = this.head.value;
+    this.head = this.head.next;
+    this.length--;
+    return deletedHead;
   }
 }
 
