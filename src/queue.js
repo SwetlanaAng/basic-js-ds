@@ -23,18 +23,19 @@ class Queue {
   }
 
   enqueue(value) {
-    if(this.length === 0) this.head = new ListNode(value);
+    if(this.length === 0) this.head = { ...new ListNode(value) };
     else {
       let current = this.head;
       while(current.next) {
         current = current.next;
       };
-      current.next = new ListNode(value);
+      current.next = { ...new ListNode(value) };
     }
     this.length++;
   }
 
   dequeue() {
+    if (!this.head) return undefined;
     const deletedHead = this.head.value;
     this.head = this.head.next;
     this.length--;
